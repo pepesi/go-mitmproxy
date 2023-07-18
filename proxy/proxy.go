@@ -365,7 +365,7 @@ func (proxy *Proxy) handleConnect(res http.ResponseWriter, req *http.Request) {
 		conn, err = proxy.interceptor.dial(req)
 	} else {
 		log.Debugf("begin transpond %v", req.Host)
-		conn, err = getConnFrom(req.Host, proxy.Opts.Upstream, proxy.dynamicUpstreamFunc)
+		conn, err = getConnFrom(req, proxy.Opts.Upstream, proxy.dynamicUpstreamFunc)
 	}
 	if err != nil {
 		log.Error(err)
