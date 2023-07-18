@@ -80,20 +80,6 @@ func (c *ServerConn) TlsState() *tls.ConnectionState {
 // connection context ctx key
 var connContextKey = new(struct{})
 
-// client ip context ctx key
-var clientIPcontextKey = new(struct{})
-
-func GetRealClientIP(req *http.Request) string {
-	if ip, ok := req.Context().Value(clientIPcontextKey).(string); ok {
-		return ip
-	}
-	return ""
-}
-
-func SetRealClientIP(req *http.Request, realip string) *http.Request {
-	return req.WithContext(context.WithValue(req.Context(), clientIPcontextKey, realip))
-}
-
 // connection context
 type ConnContext struct {
 	ClientConn *ClientConn `json:"clientConn"`
